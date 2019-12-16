@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos voitures{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Nos voitures </h1>
+    <div class="row">
+    {% for voiture in vente %}
+    {% set url= path('vente_show', {'slug': voiture.slug }) %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <a href="{{ url }}"><h3 class="card-header" style="text-align:center;">{{voiture.marque}}</h3></a>
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align:center;">{{voiture.marque}} {{voiture.modele}}</h5>
+                </div>
+                <a href="{{ url }}"><img src="{{ voiture.coverimg}}" alt="image de {{ voiture.modele }}" class="coverimg"></a>
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{voiture.km}} Km</li>
+                    <li class="list-group-item">{{voiture.prix}} €</li>
+                </ul>
+                <div class="card-body">
+                    <h6><a href="{{ url }}" class="card-link"><strong>En savoir plus</strong></a></h6>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

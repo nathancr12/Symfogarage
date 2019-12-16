@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block title %}Annonce:{% endblock %}
+
+{% block body %}
+<div class="annonce-title);">
+    <div class="container">
+        <h1>Occasion : {{voiture.marque}} {{voiture.modele}}</h1>
+        
+        <a href="#" class="btn btn-primary">Appeler</a>
+         <a href="#" class="btn btn-primary">Réserver</a>
+    
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            {{voiture.descrip | raw}}
+            <div class="bd-example">
+                <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for image in voiture.images %}
+                            <li data-target="#carouselExampleCaptions" data-slide-to="{{ loop.index0}}" {% if loop.first %} class="active" {% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for image in voiture.images %}
+                        <div class="carousel-item {% if loop.first %} active {% endif %}">
+                            <img src="{{ image.url }}" class="d-block w-100" alt="Image de {{voiture.modele}}">
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                <div class="card-header"><h3>{{voiture.prix}} €</h3> <p style="font-size:9px;">T.V.A. incluse</p><h5>{{voiture.km}} km</h5></div>
+                <div class="card-body">
+                    Les options:
+                    <p class="card-text">{{voiture.voption}}.</p>
+                </div>
+                </div>
+                <div class="card border-primary mb-3" style="max-width: 18rem;">
+                    <h5><strong><div class="card-header" style="text-align:center";>Données générales</div></strong></h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Marque</p>
+                                <p>Modèle</p>
+                                <p>Puissance</p>
+                                <p>Cylindre</p>
+                                <p>Carburant</p>
+                                <p>Transmission</p>
+                                <p>Nombre de propriétaire</p>
+                                <p>Année de circulation</p>
+                            </div>
+                            <div class="col-6">
+                                <p><strong>{{voiture.marque}}</strong></p>
+                                <p><strong>{{voiture.modele}}</strong></p>
+                                <p><strong>{{voiture.puissance}}</strong></p>
+                                <p><strong>{{voiture.cylindre}}</strong></p>
+                                <p><strong>{{voiture.carburant}}</strong></p>
+                                <p><strong>{{voiture.transmission}}</strong></p>
+                                <p><strong>{{voiture.proprio}}</strong></p>
+                                 <p><strong>{{voiture.annee}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

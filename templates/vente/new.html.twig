@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Création d'une annonce{% endblock %}
+
+{#{% form_theme myForm _self %}#}
+{% form_theme myForm _self %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Création d'une nouvelle annonce</h1>
+
+        {{ form_start(myForm)}}
+
+        {{ form_widget(myForm)}}
+            <button type="submit" class="btn btn-primary">Création d'une annonce</button>
+        {{ form_end(myForm)}}
+
+    </div>
+
+{% endblock %}
+
+{% block _annonce_images_widget %}
+
+    <p>ici, vous pouvez ajouter vos propres images</p>
+    {{ form_widget(form) }} {#Si on veut ajouter un élément comme un bouton #}
+    <input type="hidden" id="widget-counter" value="0"> 
+    <div class="form-group">
+        <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
+    </div>
+
+{% endblock %}
+
+{% block _annonce_images_entry_row %}
+    {# entry précise le entry_type de notre AnnonceType au nibeau de la collection - donc chaque formulaire ImageType #}
+    {# permet de juste afficher le widget donc plus les 0 1 2 3 ... #}
+    {{ form_widget(form) }}
+
+{% endblock %}
+
+{% block _annonce_images_entry_widget %}
+    {# entry précise le entry_type de notre AnnonceTyp au niveau de la collection - donc chaque formulaire ImageType#}
+    <div class="form-group" id="block_{{id}}"> {# id est une variable du block - block_annonce_images_0#}
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(form.url) }}
+                        {{ form_errors(form.url) }}
+                    </div>
+                    <div class="col">
+                        {{ form_widget(form.caption) }}
+                        {{ form_errors(form.caption) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}">X</button>
+            </div>
+        </div>
+    </div>
+   
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="/js/new.js"></script>
+{% endblock %}
